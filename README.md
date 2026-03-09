@@ -48,7 +48,7 @@ console.log(data.monthly_payment); // 1517.47
 ## Self-Hosting
 
 ```bash
-git clone https://github.com/YOUR_GITHUB_USERNAME/fincalc-api
+git clone https://github.com/robertandrewpringle-cloud/fincalc-api
 cd fincalc-api
 docker compose up -d
 curl http://localhost/health

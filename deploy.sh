@@ -14,7 +14,7 @@ echo "==> Pulling latest code..."
 if [ -d "/opt/fincalcapi" ]; then
     cd /opt/fincalcapi && git pull
 else
-    git clone https://github.com/YOUR_GITHUB_USERNAME/fincalc-api /opt/fincalcapi
+    git clone https://github.com/robertandrewpringle-cloud/fincalc-api /opt/fincalcapi
     cd /opt/fincalcapi
 fi
 
