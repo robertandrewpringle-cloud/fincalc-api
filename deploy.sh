@@ -8,7 +8,11 @@ EMAIL="${EMAIL:-admin@fincalcapi.com}"
 
 echo "==> Installing dependencies..."
 apt-get update -qq
-apt-get install -y -qq certbot git
+apt-get install -y -qq git
+
+echo "==> Installing certbot via snap..."
+snap install --classic certbot
+ln -sf /snap/bin/certbot /usr/bin/certbot || true
 
 echo "==> Pulling latest code..."
 if [ -d "/opt/fincalcapi" ]; then
