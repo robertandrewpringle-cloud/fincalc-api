@@ -1,4 +1,10 @@
+from fastapi import HTTPException
+
 def calculate_mortgage(home_price: float, down_payment: float, annual_rate: float, term_years: int) -> dict:
+    if home_price <= 0:
+        raise HTTPException(status_code=422, detail="home_price must be greater than zero.")
+    if down_payment >= home_price:
+        raise HTTPException(status_code=422, detail="down_payment must be less than home_price.")
     loan_amount = home_price - down_payment
     monthly_rate = annual_rate / 100 / 12
     n = term_years * 12

@@ -13,6 +13,8 @@ def calculate_irr(cash_flows: list[float]) -> dict:
         if abs(dnpv) < 1e-12:
             break
         rate_new = rate - npv / dnpv
+        if rate_new <= -1:
+            rate_new = -0.9999
         if abs(rate_new - rate) < 1e-8:
             rate = rate_new
             break

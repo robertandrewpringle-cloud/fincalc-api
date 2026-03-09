@@ -5,6 +5,8 @@ def calculate_roi(initial_investment: float, final_value: float, years: float = 
         raise HTTPException(status_code=422, detail="initial_investment must be greater than zero.")
     if years <= 0:
         raise HTTPException(status_code=422, detail="years must be greater than zero.")
+    if final_value < 0:
+        raise HTTPException(status_code=422, detail="final_value cannot be negative.")
     profit_loss = final_value - initial_investment
     roi_percent = (profit_loss / initial_investment) * 100
     annualized_roi_percent = ((final_value / initial_investment) ** (1 / years) - 1) * 100
