@@ -21,7 +21,7 @@ fi
 echo "==> Obtaining SSL certificate..."
 certbot certonly --standalone --non-interactive --agree-tos \
     -m "$EMAIL" -d "$DOMAIN" --pre-hook "docker compose down" \
-    --post-hook "docker compose up -d" 2>/dev/null || echo "Cert already exists, skipping."
+    --post-hook "docker compose up -d" || echo "Cert already exists or renewal skipped."
 
 echo "==> Building and starting containers..."
 docker compose build --no-cache

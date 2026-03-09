@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Query
+from fastapi import APIRouter, Query, HTTPException
 from api.calculators.amortization import calculate_amortization
 from api.calculators.compound_interest import calculate_compound_interest
 from api.calculators.roi import calculate_roi
@@ -40,14 +40,20 @@ def npv(
     rate: float = Query(..., description="Discount rate (e.g. 10.0 for 10%)"),
     cash_flows: str = Query(..., description="Comma-separated cash flows, first is initial investment (negative)"),
 ):
-    flows = [float(x) for x in cash_flows.split(",")]
+    try:
+        flows = [float(x) for x in cash_flows.split(",")]
+    except ValueError:
+        raise HTTPException(status_code=422, detail="cash_flows must be comma-separated numbers, e.g. -1000,400,400")
     return calculate_npv(rate, flows)
 
 @router.get("/irr", summary="Internal Rate of Return")
 def irr(
     cash_flows: str = Query(..., description="Comma-separated cash flows, first must be negative"),
 ):
-    flows = [float(x) for x in cash_flows.split(",")]
+    try:
+        flows = [float(x) for x in cash_flows.split(",")]
+    except ValueError:
+        raise HTTPException(status_code=422, detail="cash_flows must be comma-separated numbers, e.g. -1000,400,400")
     return calculate_irr(flows)
 
 @router.get("/break-even", summary="Break-Even Analysis")
