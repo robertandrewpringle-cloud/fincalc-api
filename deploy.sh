@@ -8,7 +8,7 @@ EMAIL="${EMAIL:-admin@fincalcapi.com}"
 
 echo "==> Installing dependencies..."
 apt-get update -qq
-apt-get install -y -qq certbot python3-certbot-nginx git
+apt-get install -y -qq certbot git
 
 echo "==> Pulling latest code..."
 if [ -d "/opt/fincalcapi" ]; then
